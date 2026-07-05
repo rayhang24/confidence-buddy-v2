@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>শক্তি AI — তোমার আত্মবিশ্বাসের বন্ধু</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F6FBF9;
+    --sky: #BFE3F0;
+    --sky-deep: #8FCBE0;
+    --mint: #BFEBD3;
+    --mint-deep: #8FDAB2;
+    --butter: #FFEFB0;
+    --peach: #FFD3A1;
+    --peach-deep: #FF9F68;
+    --ink: #223038;
+    --ink-soft: #4C5E67;
+    --card: #FFFFFF;
+    --ring: #8FCBE0;
+    --radius-lg: 32px;
+    --radius-md: 22px;
+    --radius-sm: 14px;
+    --shadow: 0 18px 40px -20px rgba(34,48,56,0.25);
+    --font-display: 'Baloo Da 2', 'Hind Siliguri', sans-serif;
+    --font-body: 'Hind Siliguri', sans-serif;
+    --font-utility: 'Quicksand', sans-serif;
+    --transition: 240ms cubic-bezier(.4,0,.2,1);
+  }
+
+  body.contrast{
+    --bg: #0E1113;
+    --card: #17201F;
+    --ink: #FFFFFF;
+    --ink-soft: #D8E4E1;
+    --sky: #6FB8D6;
+    --mint: #5FC98F;
+    --peach-deep: #FFB25C;
+    --shadow: 0 0 0 1px rgba(255,255,255,0.12);
+  }
+
+  body.large-text{
+    font-size: 112.5%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    transition: background var(--transition), color var(--transition);
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3, .display{
+    font-family: var(--font-display);
+    line-height: 1.25;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .eyebrow{
+    font-family: var(--font-utility);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--peach-deep);
+  }
+
+  a{ color: inherit; }
+  button{ font-family: inherit; cursor: pointer; }
+  :focus-visible{ outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 8px; }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position: sticky; top:0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 28px; max-width:1120px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-family: var(--font-display); font-weight:800; font-size:1.25rem; }
+  .brand svg{ width:38px; height:38px; }
+  .nav-actions{ display:flex; gap:10px; align-items:center; }
+  .a11y-btn{
+    display:flex; align-items:center; gap:6px;
+    background: var(--card); border:1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 999px; padding: 8px 14px; font-size:0.85rem; font-weight:600; color: var(--ink-soft);
+    transition: transform var(--transition), border-color var(--transition);
+  }
+  .a11y-btn:hover{ transform: translateY(-1px); border-color: var(--peach-deep); }
+  .a11y-btn.active{ background: var(--peach-deep); color:#241205; border-color: transparent; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 72px 0 40px;
+    position: relative;
+  }
+  .blob-bg{
+    position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  }
+  .blob-bg span{
+    position:absolute; border-radius:50%; filter: blur(0px); opacity:0.55;
+  }
+  .blob1{ width:420px; height:420px; background: var(--mint); top:-160px; right:-120px; }
+  .blob2{ width:280px; height:280px; background: var(--sky); bottom:-100px; left:-80px; }
+
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:48px; align-items:center;
+  }
+  .hero h1{ font-size: clamp(2.1rem, 4.4vw, 3.2rem); }
+  .hero h1 .accent{ color: var(--peach-deep); }
+  .hero p.lede{ margin-top:18px; font-size:1.08rem; color: var(--ink-soft); max-width: 46ch; }
+  .hero-ctas{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 14px 26px; border-radius: 999px; font-weight:700; font-size:1rem;
+    border:none; transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .btn-primary{ background: var(--peach-deep); color:#2A1200; box-shadow: var(--shadow); }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost{ background: transparent; border:2px solid color-mix(in srgb, var(--ink) 18%, transparent); color: var(--ink); }
+  .btn-ghost:hover{ border-color: var(--peach-deep); }
+
+  .stat-row{ display:flex; gap:26px; margin-top: 38px; flex-wrap:wrap; }
+  .stat-row div{ font-family: var(--font-utility); }
+  .stat-row strong{ display:block; font-size:1.5rem; font-weight:700; }
+  .stat-row span{ font-size:0.8rem; color: var(--ink-soft); }
+
+  /* mascot */
+  .mascot-stage{ position:relative; display:flex; justify-content:center; }
+  .mascot-stage svg{ width: 100%; max-width: 360px; }
+  @media (prefers-reduced-motion: no-preference){
+    .float{ animation: floaty 5s ease-in-out infinite; }
+    .blink{ animation: blink 4.5s infinite; }
+    .wing-l{ animation: wingL 2.6s ease-in-out infinite; transform-origin: 130px 190px;}
+    .wing-r{ animation: wingR 2.6s ease-in-out infinite; transform-origin: 250px 190px;}
+  }
+  @keyframes floaty{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-14px);} }
+  @keyframes blink{ 0%,92%,100%{ transform: scaleY(1);} 95%{ transform: scaleY(0.1);} }
+  @keyframes wingL{ 0%,100%{ transform: rotate(0deg);} 50%{ transform: rotate(-8deg);} }
+  @keyframes wingR{ 0%,100%{ transform: rotate(0deg);} 50%{ transform: rotate(8deg);} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 84px 0; }
+  .section-head{ max-width: 640px; margin-bottom: 44px; }
+  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top:8px; }
+  .section-head p{ color: var(--ink-soft); margin-top:12px; }
+
+  /* ---------- PROFILE PICKER (signature interactive) ---------- */
+  .profile-shell{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:36px; align-items:start;
+  }
+  .profile-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+  .profile-chip{
+    background: var(--card); border: 2px solid transparent; border-radius: var(--radius-sm);
+    padding: 16px 10px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow: var(--shadow); transition: transform var(--transition), border-color var(--transition);
+  }
+  .profile-chip svg{ width:30px; height:30px; }
+  .profile-chip span{ font-size:0.82rem; font-weight:600; color: var(--ink-soft); }
+  .profile-chip:hover{ transform: translateY(-3px); }
+  .profile-chip.active{ border-color: var(--peach-deep); }
+  .profile-chip.active span{ color: var(--ink); }
+
+  .preview-panel{
+    background: var(--card); border-radius: var(--radius-lg); padding: 30px;
+    box-shadow: var(--shadow); position:sticky; top: 96px;
+    border: 1px solid color-mix(in srgb, var(--ink) 6%, transparent);
+  }
+  .preview-panel .tag{
+    display:inline-block; padding:5px 14px; border-radius:999px; font-size:0.75rem; font-weight:700;
+    background: var(--mint); color:#0E3B24; font-family: var(--font-utility); margin-bottom:14px;
+  }
+  .preview-panel h3{ font-size:1.3rem; }
+  .preview-panel p{ color: var(--ink-soft); margin-top:10px; }
+  .preview-panel ul{ margin-top:16px; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .preview-panel li{ display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color: var(--ink-soft); }
+  .preview-panel li svg{ width:16px; height:16px; flex-shrink:0; margin-top:4px; color: var(--peach-deep); }
+
+  /* ---------- AI FRIEND CHAT ---------- */
+  .chat-shell{
+    display:grid; grid-template-columns: 0.85fr 1.15fr; gap:44px; align-items:center;
+  }
+  .chat-window{
+    background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow);
+    padding: 22px; max-width: 460px;
+  }
+  .chat-head{ display:flex; align-items:center; gap:10px; padding-bottom:14px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent); margin-bottom:16px; }
+  .chat-head svg{ width:34px; height:34px; }
+  .chat-head strong{ display:block; font-family: var(--font-display); }
+  .chat-head small{ color: var(--ink-soft); font-size:0.75rem; }
+  .bubble{
+    max-width: 82%; padding: 12px 16px; border-radius: 18px; margin-bottom: 10px; font-size: 0.95rem;
+    opacity:0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease;
+  }
+  .bubble.show{ opacity:1; transform: translateY(0); }
+  .bubble.child{ background: var(--sky); margin-left:auto; border-bottom-right-radius:6px; color:#0B2E3D; }
+  .bubble.ai{ background: var(--mint); border-bottom-left-radius:6px; color:#0E3B24; }
+  .replay-btn{
+    margin-top:6px; background:none; border:1px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+    padding:8px 16px; border-radius:999px; font-size:0.8rem; font-weight:600; color: var(--ink-soft);
+  }
+
+  .feature-list{ display:flex; flex-direction:column; gap:16px; }
+  .feature-item{ display:flex; gap:14px; align-items:flex-start; }
+  .feature-item .dot{
+    width:38px; height:38px; border-radius:12px; background: var(--butter); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .feature-item h4{ font-family: var(--font-display); font-size:1.02rem; margin-bottom:4px; }
+  .feature-item p{ margin:0; color: var(--ink-soft); font-size:0.92rem; }
+
+  /* ---------- CONFIDENCE GRID ---------- */
+  .confidence-grid{ display:grid; grid-template-columns: repeat(5,1fr); gap:16px; }
+  .cgrid-card{
+    background: var(--card); border-radius: var(--radius-md); padding:22px 16px; text-align:center;
+    box-shadow: var(--shadow); transition: transform var(--transition);
+  }
+  .cgrid-card:hover{ transform: translateY(-4px); }
+  .cgrid-card svg{ width:36px; height:36px; margin-bottom:10px; }
+  .cgrid-card h4{ font-family: var(--font-display); font-size:0.98rem; margin-bottom:6px; }
+  .cgrid-card p{ margin:0; font-size:0.8rem; color: var(--ink-soft); }
+
+  /* ---------- LEARNING UNIVERSE ---------- */
+  .learn-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+  .learn-card{
+    background: var(--card); border-radius: var(--radius-md); padding:24px; box-shadow: var(--shadow);
+    display:flex; gap:16px; align-items:flex-start;
+    border-left: 5px solid var(--sky);
+  }
+  .learn-card:nth-child(2n){ border-left-color: var(--mint); }
+  .learn-card:nth-child(3n){ border-left-color: var(--peach); }
+  .learn-card svg{ width:30px; height:30px; flex-shrink:0; }
+  .learn-card h4{ font-family: var(--font-display); font-size:1.02rem; margin-bottom:6px; }
+  .learn-card p{ margin:0; color: var(--ink-soft); font-size:0.88rem; }
+
+  /* ---------- DASHBOARD PREVIEW ---------- */
+  .dash-shell{ display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
+  .dash-card{ background: var(--card); border-radius: var(--radius-lg); padding:28px; box-shadow: var(--shadow); }
+  .dash-card h3{ font-size:1.1rem; margin-bottom:18px; }
+  .bar-row{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .bar-row span{ width:64px; font-size:0.78rem; color: var(--ink-soft); flex-shrink:0; }
+  .bar-track{ flex:1; height:12px; background: color-mix(in srgb, var(--ink) 8%, transparent); border-radius:999px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:999px; background: linear-gradient(90deg, var(--sky), var(--mint)); }
+  .mood-row{ display:flex; justify-content:space-between; margin-top:8px; }
+  .mood-row div{ text-align:center; font-size:1.6rem; }
+  .mood-row span{ display:block; font-size:0.7rem; color: var(--ink-soft); margin-top:4px; }
+
+  /* ---------- ACCESSIBILITY ---------- */
+  .a11y-shell{
+    background: linear-gradient(135deg, var(--sky) 0%, var(--mint) 100%);
+    border-radius: var(--radius-lg); padding: 46px; color:#0B2E3D;
+  }
+  body.contrast .a11y-shell{ color:#fff; }
+  .a11y-shell .section-head p{ color:#0B2E3D; opacity:0.85; }
+  body.contrast .a11y-shell .section-head p{ color:#fff; }
+  .a11y-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:20px;}
+  .a11y-card{ background: rgba(255,255,255,0.55); border-radius: var(--radius-sm); padding:18px; }
+  body.contrast .a11y-card{ background: rgba(255,255,255,0.08); }
+  .a11y-card h4{ font-family: var(--font-display); font-size:0.98rem; margin-bottom:6px; }
+  .a11y-card p{ margin:0; font-size:0.85rem; }
+  .try-it{ margin-top:26px; display:flex; gap:12px; flex-wrap:wrap; }
+  .try-btn{
+    background:#fff; border:none; border-radius:999px; padding:12px 22px; font-weight:700; font-size:0.9rem;
+    box-shadow: 0 8px 18px -8px rgba(0,0,0,0.3);
+  }
+  .try-btn.active{ background: #0B2E3D; color:#fff; }
+
+  /* ---------- SECURITY ---------- */
+  .sec-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:16px; }
+  .sec-card{ text-align:center; padding: 22px 14px; }
+  .sec-card svg{ width:32px; height:32px; margin-bottom:10px; }
+  .sec-card h4{ font-size:0.9rem; font-family: var(--font-display); margin-bottom:4px; }
+  .sec-card p{ font-size:0.78rem; color: var(--ink-soft); margin:0; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 60px 0 40px; border-top:1px solid color-mix(in srgb, var(--ink) 8%, transparent); }
+  .foot-grid{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; }
+  .palette{ display:flex; gap:8px; margin-top:14px; }
+  .palette span{ width:26px; height:26px; border-radius:8px; display:inline-block; }
+  footer p.tag{ color: var(--ink-soft); font-size:0.85rem; max-width: 40ch; }
+
+  @media (max-width: 880px){
+    .hero-grid, .profile-shell, .chat-shell, .dash-shell{ grid-template-columns: 1fr; }
+    .mascot-stage{ order:-1; margin-bottom:10px; }
+    .confidence-grid{ grid-template-columns: repeat(2,1fr); }
+    .learn-grid{ grid-template-columns: 1fr; }
+    .a11y-grid{ grid-template-columns: 1fr; }
+    .sec-grid{ grid-template-columns: repeat(2,1fr); }
+    .profile-grid{ grid-template-columns: repeat(3,1fr); }
+    .preview-panel{ position:static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob-bg" aria-hidden="true"><span class="blob1"></span><span class="blob2"></span></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="28" fill="#BFEBD3"/><circle cx="22" cy="26" r="4" fill="#223038"/><circle cx="38" cy="26" r="4" fill="#223038"/><path d="M20 38 Q30 46 40 38" stroke="#223038" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      শক্তি <span style="color:var(--peach-deep)">AI</span>
+    </div>
+    <div class="nav-actions">
+      <button class="a11y-btn" id="contrastToggle" aria-pressed="false">◐ হাই কনট্রাস্ট</button>
+      <button class="a11y-btn" id="textToggle" aria-pressed="false">Aa বড় লেখা</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">বাংলাদেশের বিশেষ শিশুদের জন্য</p>
+      <h1>তোমার <span class="accent">আত্মবিশ্বাসের</span><br>বন্ধু, একদম তোমার ভাষায়</h1>
+      <p class="lede">অটিজম, ADHD, ডাউন সিনড্রোম, দৃষ্টি ও শ্রবণ প্রতিবন্ধকতা সহ প্রতিটি বিশেষ শিশুর জন্য বাংলায় তৈরি একটি নিরাপদ, ধৈর্যশীল ও যত্নশীল শেখার সঙ্গী। প্রতিটি শিশুর নিজস্ব গতি, নিজস্ব পথ।</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#profiles">যাত্রা শুরু করি →</a>
+        <a class="btn btn-ghost" href="#ai-friend">আলো-র সাথে পরিচয় হও</a>
+      </div>
+      <div class="stat-row">
+        <div><strong>৯</strong><span>বিশেষ প্রোফাইল</span></div>
+        <div><strong>১০০%</strong><span>বাংলা ভাষায়</span></div>
+        <div><strong>WCAG 2.2</strong><span>অ্যাক্সেসিবিলিটি মান</span></div>
+      </div>
+    </div>
+    <div class="mascot-stage">
+      <svg viewBox="0 0 380 380" aria-hidden="true">
+        <g class="float">
+          <ellipse cx="190" cy="330" rx="70" ry="12" fill="#000" opacity="0.06"/>
+          <path class="wing-l" d="M150 200 Q90 190 95 250 Q120 260 150 235 Z" fill="#8FCBE0"/>
+          <path class="wing-r" d="M230 200 Q290 190 285 250 Q260 260 230 235 Z" fill="#8FCBE0"/>
+          <ellipse cx="190" cy="220" rx="95" ry="100" fill="#BFEBD3"/>
+          <ellipse cx="190" cy="255" rx="55" ry="50" fill="#FFD3A1"/>
+          <circle class="blink" cx="163" cy="195" r="15" fill="#223038"/>
+          <circle class="blink" cx="217" cy="195" r="15" fill="#223038"/>
+          <circle cx="167" cy="190" r="4" fill="#fff"/>
+          <circle cx="221" cy="190" r="4" fill="#fff"/>
+          <path d="M180 218 Q190 226 200 218" stroke="#FF9F68" stroke-width="0" fill="#FF9F68"/>
+          <path d="M178 215 L202 215 L190 228 Z" fill="#FF9F68"/>
+          <path d="M150 240 Q190 260 230 240" stroke="#223038" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="120" cy="150" r="6" fill="#FFEFB0"/>
+          <circle cx="255" cy="130" r="8" fill="#FFEFB0"/>
+          <circle cx="270" cy="180" r="4" fill="#FFEFB0"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="profiles">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">০১ · অভিযোজনযোগ্য অভিজ্ঞতা</p>
+      <h2>তোমার পথ, তোমার মতো</h2>
+      <p>একটা প্রোফাইল বেছে নাও — অ্যাপ নিজে থেকেই তার ভাষা, গতি, রং আর নেভিগেশন বদলে ফেলবে। কোনো দুইটা শিশুর অভিজ্ঞতা এক নয়।</p>
+    </div>
+
+    <div class="profile-shell">
+      <div class="profile-grid" id="profileGrid" role="list"></div>
+
+      <div class="preview-panel" aria-live="polite">
+        <span class="tag" id="previewTag">অটিজম স্পেকট্রাম</span>
+        <h3 id="previewTitle">শান্ত, পূর্বাভাসযোগ্য অভিজ্ঞতা</h3>
+        <p id="previewDesc">স্পষ্ট রুটিন, কম শব্দ ও অ্যানিমেশন, এবং প্রতিটি কাজ ছোট ছোট ধাপে ভাগ করা — যাতে কোনো চমক না লাগে।</p>
+        <ul id="previewList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ai-friend" style="background: color-mix(in srgb, var(--card) 60%, transparent);">
+  <div class="wrap chat-shell">
+    <div class="chat-window">
+      <div class="chat-head">
+        <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="28" fill="#BFEBD3"/><circle cx="22" cy="26" r="4" fill="#223038"/><circle cx="38" cy="26" r="4" fill="#223038"/><path d="M20 38 Q30 46 40 38" stroke="#223038" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <div>
+          <strong>আলো — তোমার AI বন্ধু</strong>
+          <small>সবসময় ধৈর্যশীল, সবসময় পাশে</small>
+        </div>
+      </div>
+      <div id="chatLog"></div>
+      <button class="replay-btn" id="replayBtn">↻ আবার দেখাও</button>
+    </div>
+
+    <div>
+      <p class="eyebrow">০২ · কোর AI সঙ্গী</p>
+      <h2 style="margin-top:8px; margin-bottom:24px;">যে কখনো বিচার করে না</h2>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="dot">🗣️</div>
+          <div><h4>স্বাভাবিক বাংলা কণ্ঠস্বর</h4><p>ধীর ও দ্রুত — দুই মোডেই কথা বলে, শিশুর গতির সাথে মানিয়ে।</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="dot">💛</div>
+          <div><h4>হতাশা বুঝতে পারে</h4><p>মন খারাপ বা আটকে যাওয়া বুঝে নিজে থেকেই বিরতির প্রস্তাব দেয়।</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="dot">🛡️</div>
+          <div><h4>নিরাপদ ও সৎ</h4><p>অনিশ্চিত হলে সরাসরি বলে "জানি না" — কখনো ভুল তথ্য বানায় না।</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">০৩ · আত্মবিশ্বাস গড়ার সিস্টেম</p>
+      <h2>ছোট ছোট জয়, প্রতিদিন</h2>
+      <p>প্রতিটি চেষ্টাকে উদযাপন করা হয় — ফলাফলের চেয়ে চেষ্টাটাই এখানে বড়।</p>
+    </div>
+    <div class="confidence-grid" id="confidenceGrid"></div>
+  </div>
+</section>
+
+<section style="background: color-mix(in srgb, var(--card) 60%, transparent);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">০৪ · শেখার জগৎ</p>
+      <h2>খেলতে খেলতে শেখা</h2>
+      <p>বর্ণমালা থেকে ব্রেইল, ইশারা ভাষা থেকে সামাজিক দক্ষতা — সবকিছু ছবি, শব্দ আর গল্পে মোড়ানো।</p>
+    </div>
+    <div class="learn-grid" id="learnGrid"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">০৫ · অভিভাবক ও শিক্ষক</p>
+      <h2>বাইরে থেকে দেখা, ভেতর থেকে বোঝা</h2>
+      <p>অভিভাবক ও শিক্ষকরা অগ্রগতি দেখেন, চাপ দেন না।</p>
+    </div>
+    <div class="dash-shell">
+      <div class="dash-card">
+        <h3>সাপ্তাহিক অগ্রগতি</h3>
+        <div class="bar-row"><span>যোগাযোগ</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div></div>
+        <div class="bar-row"><span>মনোযোগ</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div></div>
+        <div class="bar-row"><span>স্বাধীনতা</span><div class="bar-track"><div class="bar-fill" style="width:81%"></div></div></div>
+        <div class="bar-row"><span>সামাজিক</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+      </div>
+      <div class="dash-card">
+        <h3>এই সপ্তাহের মন-অবস্থা</h3>
+        <div class="mood-row">
+          <div>😊<span>সোম</span></div>
+          <div>😐<span>মঙ্গল</span></div>
+          <div>😊<span>বুধ</span></div>
+          <div>🙂<span>বৃহঃ</span></div>
+          <div>😄<span>শুক্র</span></div>
+        </div>
+        <p style="margin-top:20px; color:var(--ink-soft); font-size:0.85rem;">রিপোর্ট PDF আকারে ডাউনলোড করা যায় — কোনো সংবেদনশীল তথ্য ছাড়াই।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="access" style="background: transparent;">
+  <div class="wrap">
+    <div class="a11y-shell">
+      <p class="eyebrow" style="color:#0B2E3D;">০৬ · অ্যাক্সেসিবিলিটি নিজেই দেখো</p>
+      <div class="section-head" style="margin-bottom:0;">
+        <h2 style="color:#0B2E3D;">এই পেজেই চেষ্টা করে দেখো</h2>
+        <p>উপরের বাটন দুটো — হাই কনট্রাস্ট আর বড় লেখা — সত্যিকারের ফাংশন। ঠিক এভাবেই পুরো অ্যাপ কাজ করবে।</p>
+      </div>
+      <div class="try-it">
+        <button class="try-btn" id="tryContrast">◐ হাই কনট্রাস্ট চালু করো</button>
+        <button class="try-btn" id="tryText">Aa লেখা বড় করো</button>
+      </div>
+      <div class="a11y-grid">
+        <div class="a11y-card"><h4>স্ক্রিন রিডার সহায়ক</h4><p>প্রতিটি বাটন ও ছবির লেবেল আছে, কীবোর্ড দিয়েও ঘোরা যায়।</p></div>
+        <div class="a11y-card"><h4>নড়াচড়া নিয়ন্ত্রণ</h4><p>ঝলকানি নেই — যাদের মোশন-সংবেদনশীলতা আছে তাদের জন্য নিরাপদ।</p></div>
+        <div class="a11y-card"><h4>অফলাইনেও চলে</h4><p>ইন্টারনেট না থাকলেও মূল পাঠ ও ভয়েস কাজ করে।</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">০৭ · নিরাপত্তা ও বিশ্বাস</p>
+      <h2>বাবা-মায়ের অনুমতি সবার আগে</h2>
+    </div>
+    <div class="sec-grid" id="secGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand">
+        <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="28" fill="#BFEBD3"/><circle cx="22" cy="26" r="4" fill="#223038"/><circle cx="38" cy="26" r="4" fill="#223038"/><path d="M20 38 Q30 46 40 38" stroke="#223038" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        শক্তি <span style="color:var(--peach-deep)">AI</span>
+      </div>
+      <p class="tag" style="margin-top:14px;">বাংলাদেশের প্রতিটি বিশেষ শিশুর জন্য, ভালোবাসা ও ধৈর্য দিয়ে তৈরি একটি ধারণা-প্রোটোটাইপ।</p>
+      <div class="palette" aria-hidden="true">
+        <span style="background:#BFE3F0"></span><span style="background:#BFEBD3"></span><span style="background:#FFEFB0"></span><span style="background:#FFD3A1"></span><span style="background:#FF9F68"></span>
+      </div>
+    </div>
+    <div style="font-size:0.85rem; color:var(--ink-soft);">
+      এটি একটি ডিজাইন প্রোটোটাইপ — বাস্তব অ্যাপ নয়।<br>
+      Flutter · Firebase · বাংলা AI ভয়েস দিয়ে তৈরি করার পরিকল্পনা।
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- Accessibility toggles ----------
+  function wireToggle(btnIds, cls, labelOn, labelOff){
+    const btns = btnIds.map(id => document.getElementById(id)).filter(Boolean);
+    btns.forEach(b => b.addEventListener('click', () => {
+      const active = document.body.classList.toggle(cls);
+      btns.forEach(x => {
+        x.classList.toggle('active', active);
+        x.setAttribute('aria-pressed', String(active));
+      });
+    }));
+  }
+  wireToggle(['contrastToggle','tryContrast'], 'contrast');
+  wireToggle(['textToggle','tryText'], 'large-text');
+
+  // ---------- Profile data ----------
+  const profiles = [
+    { tag:'অটিজম স্পেকট্রাম', icon:'circle', title:'শান্ত, পূর্বাভাসযোগ্য অভিজ্ঞতা',
+      desc:'স্পষ্ট রুটিন, কম শব্দ ও অ্যানিমেশন, এবং প্রতিটি কাজ ছোট ছোট ধাপে ভাগ করা — যাতে কোনো চমক না লাগে।',
+      points:['ধাপে ধাপে ভিজ্যুয়াল শিডিউল','কম উদ্দীপক রং ও শব্দ','পরিবর্তনের আগাম সংকেত'] },
+    { tag:'ADHD', icon:'bolt', title:'ছোট কাজ, দ্রুত পুরস্কার',
+      desc:'মনোযোগ ধরে রাখতে কাজগুলো ছোট ছোট মিশনে ভাগ করা, আর সাথে সাথে প্রশংসা।',
+      points:['৩–৫ মিনিটের মাইক্রো-টাস্ক','তাৎক্ষণিক পয়েন্ট ও অ্যানিমেশন','মনোযোগ-ধরে-রাখার মিনি গেম'] },
+    { tag:'ডাউন সিনড্রোম', icon:'heart', title:'সহজ ভাষা, বড় ছবি',
+      desc:'সহজ শব্দ, বড় স্পষ্ট ছবি আর ধীরে ধীরে পুনরাবৃত্তির মাধ্যমে শেখা।',
+      points:['সরল বাক্য গঠন','বড় বাটন ও আইকন','পুনরাবৃত্তিমূলক অনুশীলন'] },
+    { tag:'দৃষ্টি প্রতিবন্ধকতা', icon:'eye', title:'ভয়েস-প্রথম অভিজ্ঞতা',
+      desc:'পুরো অ্যাপ কণ্ঠস্বর দিয়ে চালানো যায়, সাথে সম্পূর্ণ ব্রেইল মডিউল।',
+      points:['স্ক্রিন রিডার সম্পূর্ণ সামঞ্জস্যপূর্ণ','ব্রেইল অক্ষর ও শব্দ অনুশীলন','ভয়েস কমান্ড নেভিগেশন'] },
+    { tag:'শ্রবণ প্রতিবন্ধকতা', icon:'ear', title:'চোখে দেখা যোগাযোগ',
+      desc:'বাংলাদেশ ইশারা ভাষার ভিডিও, ভিজ্যুয়াল অ্যালার্ট আর লিখিত সংলাপ।',
+      points:['ইশারা ভাষা ভিডিও পাঠ','কম্পন ও আলোর মাধ্যমে সতর্কতা','লিখিত চ্যাট বিকল্প'] },
+    { tag:'কথা বলায় জটিলতা', icon:'chat', title:'ছবি দিয়ে কথা বলা',
+      desc:'PECS পদ্ধতিতে ছবি টেনে এনে বাক্য তৈরি, সাথে উচ্চারণ অনুশীলন।',
+      points:['ড্র্যাগ-ড্রপ পিকচার কথন','উচ্চারণ ফিডব্যাক','ধৈর্যশীল পুনরাবৃত্তি'] },
+    { tag:'বুদ্ধিবৃত্তিক প্রতিবন্ধকতা', icon:'star', title:'অতি সরল, বারবার',
+      desc:'প্রতিটি ধাপ অতি সরল রাখা হয়, আর চাক্ষুষ ইঙ্গিত দিয়ে সাহায্য করা হয়।',
+      points:['একবারে একটিই নির্দেশনা','চাক্ষুষ ইঙ্গিত ও তীর চিহ্ন','অসীম চেষ্টার সুযোগ'] },
+    { tag:'শেখার জটিলতা', icon:'book', title:'মাল্টি-সেন্সরি পাঠ',
+      desc:'দেখা, শোনা আর ছোঁয়া — তিন উপায়েই একই জিনিস শেখার সুযোগ।',
+      points:['অডিও সহ প্রতিটি পাঠ','নমনীয় শেখার গতি','ভিন্ন ভিন্ন উপস্থাপনার ধরন'] },
+    { tag:'সেরিব্রাল পালসি', icon:'hand', title:'সহজ স্পর্শ, বড় বাটন',
+      desc:'বড়, প্রশস্ত বাটন আর ভয়েস কমান্ড বিকল্প — কম নির্ভুল স্পর্শেও কাজ করে।',
+      points:['বড় টাচ-টার্গেট','ভয়েস কমান্ড বিকল্প','ভুল-সহনশীল ইন্টারফেস'] },
+  ];
+
+  const icons = {
+    circle: '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>',
+    bolt: '<path d="M13 2 3 14h7l-1 8 10-12h-7z" fill="currentColor"/>',
+    heart: '<path d="M12 20s-7-4.6-9.5-9C1 8 2.5 4 6.5 4 9 4 11 5.8 12 7c1-1.2 3-3 5.5-3 4 0 5.5 4 4 7-2.5 4.4-9.5 9-9.5 9z" fill="currentColor"/>',
+    eye: '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/>',
+    ear: '<path d="M8 14a5 5 0 0 1 5-9 6 6 0 0 1 6 6c0 4-3 5-3 8a3 3 0 0 1-6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+    chat: '<rect x="2" y="4" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 18l-2 4 5-4" fill="currentColor"/>',
+    star: '<path d="M12 2l3 7 7 .6-5.3 4.6L18 22l-6-3.8L6 22l1.3-7.8L2 9.6 9 9z" fill="currentColor"/>',
+    book: '<path d="M4 4h7v16H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 4h-7v16h7a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1z" fill="none" stroke="currentColor" stroke-width="2"/>',
+    hand: '<path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 11V3.5a1.5 1.5 0 0 1 3 0V11M14 11.5V5a1.5 1.5 0 0 1 3 0v9M17 13v-2a1.5 1.5 0 0 1 3 0v6a6 6 0 0 1-6 6h-2a7 7 0 0 1-6-3.5L4 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+
+  const grid = document.getElementById('profileGrid');
+  profiles.forEach((p, i) => {
+    const chip = document.createElement('button');
+    chip.className = 'profile-chip' + (i===0 ? ' active' : '');
+    chip.setAttribute('role','listitem');
+    chip.setAttribute('aria-pressed', i===0 ? 'true':'false');
+    chip.innerHTML = `<svg viewBox="0 0 24 24">${icons[p.icon]}</svg><span>${p.tag}</span>`;
+    chip.addEventListener('click', () => selectProfile(i, chip));
+    grid.appendChild(chip);
+  });
+
+  function selectProfile(i, chip){
+    document.querySelectorAll('.profile-chip').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed','false'); });
+    chip.classList.add('active');
+    chip.setAttribute('aria-pressed','true');
+    const p = profiles[i];
+    document.getElementById('previewTag').textContent = p.tag;
+    document.getElementById('previewTitle').textContent = p.title;
+    document.getElementById('previewDesc').textContent = p.desc;
+    const ul = document.getElementById('previewList');
+    ul.innerHTML = '';
+    p.points.forEach(pt => {
+      const li = document.createElement('li');
+      li.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L19 7"/></svg><span>${pt}</span>`;
+      ul.appendChild(li);
+    });
+  }
+
+  // ---------- Chat animation ----------
+  const messages = [
+    { who:'child', text:'আমি আজ পারিনি 😔' },
+    { who:'ai', text:'কোনো ব্যাপার না, চেষ্টা করাটাই সবচেয়ে বড় ব্যাপার। আবার একসাথে চেষ্টা করি?' },
+    { who:'child', text:'আচ্ছা, করি' },
+    { who:'ai', text:'চমৎকার! তুমি আজ অনেক সাহসী ছিলে। ⭐' }
+  ];
+  const log = document.getElementById('chatLog');
+  let chatTimer;
+  function playChat(){
+    log.innerHTML = '';
+    clearTimeout(chatTimer);
+    messages.forEach((m, idx) => {
+      chatTimer = setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'bubble ' + m.who;
+        b.textContent = m.text;
+        log.appendChild(b);
+        requestAnimationFrame(() => b.classList.add('show'));
+      }, idx * 950);
+    });
+  }
+  document.getElementById('replayBtn').addEventListener('click', playChat);
+  playChat();
+
+  // ---------- Confidence grid ----------
+  const confidence = [
+    { icon:'star', h:'দৈনিক লক্ষ্য', p:'প্রতিদিন একটি ছোট, অর্জনযোগ্য কাজ' },
+    { icon:'heart', h:'ব্যাজ', p:'নতুন দক্ষতার জন্য বিশেষ ব্যাজ' },
+    { icon:'circle', h:'তারা সংগ্রহ', p:'প্রতিটি চেষ্টার জন্য একটি তারা' },
+    { icon:'book', h:'সার্টিফিকেট', p:'বড় মাইলফলকে ডাউনলোডযোগ্য সনদ' },
+    { icon:'bolt', h:'উদযাপন মুহূর্ত', p:'ছোট, শান্ত অ্যানিমেশনে উদযাপন' },
+  ];
+  const cgrid = document.getElementById('confidenceGrid');
+  confidence.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'cgrid-card';
+    div.innerHTML = `<svg viewBox="0 0 24 24" style="color:var(--peach-deep)">${icons[c.icon]}</svg><h4>${c.h}</h4><p>${c.p}</p>`;
+    cgrid.appendChild(div);
+  });
+
+  // ---------- Learning grid ----------
+  const learning = [
+    { icon:'book', h:'বাংলা ও ইংরেজি বর্ণমালা', p:'ছবি ও শব্দ দিয়ে অক্ষর চেনা শেখা' },
+    { icon:'eye', h:'ব্রেইল মডিউল', p:'স্পর্শ-ভিত্তিক অনুশীলন ও ভয়েস গাইড' },
+    { icon:'ear', h:'ইশারা ভাষা', p:'বাংলাদেশ সাংকেতিক ভাষায় দৈনন্দিন কথোপকথন' },
+    { icon:'chat', h:'ছবি দিয়ে কথা', p:'PECS পদ্ধতিতে ভাব প্রকাশ' },
+    { icon:'heart', h:'সামাজিক দক্ষতা', p:'সম্ভাষণ, পালা মেনে চলা, সহমর্মিতা' },
+    { icon:'star', h:'দৈনন্দিন জীবন দক্ষতা', p:'সময়, টাকা, নিরাপত্তা ও পরিচ্ছন্নতা' },
+  ];
+  const lgrid = document.getElementById('learnGrid');
+  learning.forEach(l => {
+    const div = document.createElement('div');
+    div.className = 'learn-card';
+    div.innerHTML = `<svg viewBox="0 0 24 24" style="color:var(--sky-deep)">${icons[l.icon]}</svg><div><h4>${l.h}</h4><p>${l.p}</p></div>`;
+    lgrid.appendChild(div);
+  });
+
+  // ---------- Security grid ----------
+  const security = [
+    { icon:'eye', h:'এনক্রিপ্টেড ডেটা', p:'সব তথ্য সুরক্ষিতভাবে সংরক্ষিত' },
+    { icon:'heart', h:'অভিভাবকের অনুমতি', p:'প্রতিটি সংযোগে বাবা-মায়ের সম্মতি' },
+    { icon:'star', h:'ন্যূনতম তথ্য সংগ্রহ', p:'অপ্রয়োজনীয় কোনো ডেটা নেওয়া হয় না' },
+    { icon:'circle', h:'নিরাপদ লগইন', p:'ভূমিকা-ভিত্তিক প্রবেশাধিকার' },
+  ];
+  const sgrid = document.getElementById('secGrid');
+  security.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'sec-card';
+    div.innerHTML = `<svg viewBox="0 0 24 24" style="color:var(--mint-deep)">${icons[s.icon]}</svg><h4>${s.h}</h4><p>${s.p}</p>`;
+    sgrid.appendChild(div);
+  });
+
+  selectProfile(0, document.querySelector('.profile-chip'));
+})();
+</script>
+</body>
+</html>
